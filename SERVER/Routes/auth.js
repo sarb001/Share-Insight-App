@@ -2,8 +2,9 @@ const express = require('express');
 const { default: mongoose } = require('mongoose');
 const router = express.Router();
 const User = mongoose.model('User');
-
 const bcrypt = require('bcryptjs');
+const JsonToken = require('../Authorization/AuthRoute');
+
 
 router.get('/' ,(req,res) => {
     res.send('Hello .... ')
@@ -41,8 +42,9 @@ router.post('/signup' , async(req,res) =>
                     email : user.email,
                     password:user.password,
                     name :user.name,
+                    token : JsonToken(user._id)
                 })
-                // res.json({message :' Saved Successfully '})
+
             }else
             {
                 res.status(400).json({error : ' Not Able to  Create User '})
@@ -80,6 +82,7 @@ router.post('/login' ,async(req,res) => {
                 name : user.name,
                 email : user.email,
                 password : user.password,
+                token : JsonToken(user._id),
              })
         }else
         {
