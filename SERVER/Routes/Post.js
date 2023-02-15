@@ -42,15 +42,34 @@ router.post('/createpost' ,ProtectedRoute, async(req,res) => {
 router.get('/allpost' , async(req,res) => {
      try{
 
-        const getposts = await Post.find();
+        const getposts = await Post.find().populate("postedBy","_id name");
         console.log('get posts', getposts);
         res.send(' fetched all posts')
 
      }catch(err)
      {
         console.log('error is',err);
+        res.json({error : ' Not Able to Fetch All Posts '})
      }
 })
 
+
+router.get('/mypost' ,  ProtectedRoute , async(req,res) => {
+
+    try
+    {
+        const { _id } = req.user._id;
+        const mypost = await Post.find({postedBy : _id}).populate("postedBy" , "_id name")
+
+        console.log('my posts are -',mypost);
+        res.send(' ok my route  ')
+        
+    }catch(err)
+    {
+        console.log('posta Error are--',err);
+        res.send({err : ' mypost error occured are '})
+    }
+
+})
 
 module.exports = router;
