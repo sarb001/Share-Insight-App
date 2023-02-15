@@ -10,7 +10,7 @@ const postSchema = new mongoose.Schema({
     },
     body : {
         type:String,
-        required :true
+        required :true 
     },
     photo : {
         type:String,
@@ -18,8 +18,9 @@ const postSchema = new mongoose.Schema({
     },
     postedBy : {
         type:ObjectId,
-        ref :"User"
+        ref : "User"
     }
 })
 
-mongoose.model("Post",postSchema)
+
+module.exports = mongoose.model("Post",postSchema)

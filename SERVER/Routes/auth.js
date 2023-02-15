@@ -89,7 +89,7 @@ router.post('/login' ,async(req,res) => {
         }
 
     }catch(err){
-            res.status(422).json(' Wrong Credentials ')
+            res.json({error : ' Wrong Credentials '})
     }
 })
 
