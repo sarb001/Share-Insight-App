@@ -6,6 +6,8 @@ const Post = mongoose.model('Post')
 const  { ProtectedRoute } = require('../Middleware/ProtectedRoute')
 // Middleware to verify user is same Logged in
 
+// Create Post here 
+
 router.post('/createpost' ,ProtectedRoute, async(req,res) => {
 
     try{
@@ -39,6 +41,8 @@ router.post('/createpost' ,ProtectedRoute, async(req,res) => {
     }
 })
 
+// All posts like at home page of insta 
+
 router.get('/allpost' , async(req,res) => {
      try{
 
@@ -53,6 +57,7 @@ router.get('/allpost' , async(req,res) => {
      }
 })
 
+// For Specific User Logged in Post Show here 
 
 router.get('/mypost' ,  ProtectedRoute , async(req,res) => {
 
