@@ -5,7 +5,6 @@ const User = mongoose.model('User');
 const bcrypt = require('bcryptjs');
 const JsonToken = require('../Authorization/AuthRoute');
 
-
 router.get('/' ,(req,res) => {
     res.send('Hello .... ')
 })
@@ -82,6 +81,7 @@ router.post('/login' ,async(req,res) => {
                 name : user.name,
                 email : user.email,
                 password : user.password,
+                token : JsonToken(user._id)
              })
         }else
         {
