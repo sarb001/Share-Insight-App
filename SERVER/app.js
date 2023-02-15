@@ -7,7 +7,9 @@ const User = require('./Models/User');
 
 app.use(express.json());            // to parse Request 
 
-app.use(require('./Routes/auth'));
+
+app.use(require('./Models/Post'));
+app.use(require('./Models/User'));
 
 dotenv.config();
 const mongourl = process.env.MONGO_URL;
