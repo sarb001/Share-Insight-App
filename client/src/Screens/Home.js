@@ -12,7 +12,7 @@ const Home = () => {
                         </div>
 
                         <div className="homepage-post-image">
-                          <span> <img src = "/homepage-img.jpg" style = {{width:'100%'}} />  </span>
+                          <span> <img src = "/homepage-img.jpg"  alt = "homepage" style = {{width:'100%'}} />  </span>
                         </div>
 
                         <div className="homepage-post-like" style = {{textAlign:'left',padding:'2%'}}> 

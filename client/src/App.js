@@ -7,11 +7,14 @@ import Signup from './Screens/Signup';
 import Login from './Screens/Login';
 import Profile from './Screens/Profile';
 import CreatePost from './Screens/CreatePost';
+import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer } from 'react-toastify';
 
 function App() {
   return (
     <div className="App">
       <BrowserRouter>
+      <ToastContainer  autoClose = {1000} />
       <Navbar />
        <Routes>
          <Route exact path = "/" element = {<Home /> }> </Route>

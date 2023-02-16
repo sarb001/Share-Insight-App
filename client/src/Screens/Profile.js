@@ -7,7 +7,7 @@ const Profile = () => {
 
          <div className = "profile-partition" style = {{display:'grid',gridTemplateColumns:'200px 1fr',paddingTop:'5%',borderBottom:'2px solid black'}}> 
               <div className = "profile-part" > 
-               <span> <img src =  "/Profile-img.png" style = {{width:'70%'}} /> </span>
+               <span> <img src =  "/Profile-img.png"  alt = "profile-img" style = {{width:'70%'}} /> </span>
               </div>
               <div className="profile-name"> 
              <div> <h4> ramesh verma </h4>  </div>
@@ -20,12 +20,12 @@ const Profile = () => {
          </div>   
 
           <div className="user-profile-images" style = {{paddingTop:'4%'}}>
-             <span> <img src =  "/Profile-img.png" style = {{width:'25%'}} /> </span>
-             <span> <img src =  "/Profile-img.png" style = {{width:'25%'}} /> </span>
-             <span> <img src =  "/Profile-img.png" style = {{width:'25%'}} /> </span>
-             <span> <img src =  "/Profile-img.png" style = {{width:'25%'}} /> </span>
-             <span> <img src =  "/Profile-img.png" style = {{width:'25%'}} /> </span>
-             <span> <img src =  "/Profile-img.png" style = {{width:'25%'}} /> </span>
+             <span> <img src =  "/Profile-img.png"  alt = "profile-img"  style = {{width:'25%'}} /> </span>
+             <span> <img src =  "/Profile-img.png"  alt = "profile-img"  style = {{width:'25%'}} /> </span>
+             <span> <img src =  "/Profile-img.png"  alt = "profile-img"  style = {{width:'25%'}} /> </span>
+             <span> <img src =  "/Profile-img.png"  alt = "profile-img"  style = {{width:'25%'}} /> </span>
+             <span> <img src =  "/Profile-img.png"  alt = "profile-img"  style = {{width:'25%'}} /> </span>
+             <span> <img src =  "/Profile-img.png"  alt = "profile-img"  style = {{width:'25%'}} /> </span>
           </div>
       </div>
     </>

@@ -3,9 +3,9 @@ import React from 'react';
 const CreatePost = () => {
   return (
     <div>
-
                     <div className = "createpost-container" style = {{display:'flex',justifyContent:'center'}}>
                         <div className = "createpost-container" style = {{width:'35%',padding:'3%',backgroundColor:'wheat',color:'black'}}>
+                          
                                 <div className="card-input">
                                     <span>  <input type = "text"  placeholder='Enter Title...'/> </span>
                                     <span>  <input type = "text"  placeholder='Enter Body...'/> </span>
