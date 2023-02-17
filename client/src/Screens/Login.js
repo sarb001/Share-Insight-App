@@ -28,14 +28,13 @@ const Login = () => {
 
       navigate('/');
 
-
     }catch(error)
     {
       toast.error(' Wrong Credentials ')
     }
-
   }
 
+  
   return (
     <div>
       <div className="mycard" style = {{display:'flex',justifyContent:'center',paddingTop:'4%'}}>

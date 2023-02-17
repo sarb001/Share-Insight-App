@@ -37,9 +37,9 @@ const Signup = () => {
   }
 
 
-
   return (
     <>
+
       <div className = "mycard-signup" style = {{display:'flex',justifyContent:'center',paddingTop:'4%'}}>
          <div className = "signup-card auth-card" style = {{width:'35%',padding:'3%'}}>
 
@@ -64,7 +64,6 @@ const Signup = () => {
           </form>
          </div>
       </div>
-
 
     </>
   )
