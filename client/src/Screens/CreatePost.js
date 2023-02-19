@@ -50,18 +50,21 @@ const CreatePost = () => {
         //  }
         // }
 
-        const handlepostsubmit = () => {
-
-        }
-
 
   return (
     <div>
-                    
-                                        <input type = "file" />       
-                                        <button> here  </button> 
-
-
+            <div className="createpost-outercontainer" style = {{display:'flex',justifyContent:"center"}}>
+                    <div className = "createpost-container" style = {{width:'30%',padding:'3%',backgroundColor :'wheat'}}>
+                        <input type = "text" placeholder = 'Enter Title...' />
+                        <input type = "text" placeholder = 'Enter Body...' />
+                  
+                             <label for="file-upload" id ="file-upload">
+                                Custom Upload
+                            </label>
+                            <input id="file-upload" type="file" id = ""/>
+                        <button> Submit Post  </button> 
+                    </div>
+            </div>
     </div>
   )
 }
