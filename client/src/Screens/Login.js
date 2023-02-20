@@ -22,11 +22,17 @@ const Login = () => {
         headers : { 'Content-type' : 'application/json' },
      }
 
-     const {data} =await axios.post('/login' , {
+     const {data} = await axios.post('/login' , {
        email,password}, config);
        toast.success(' Successfully Logged In ')
 
-      navigate('/');
+        console.log('data is -',data.name);
+        console.log(' type  is -',  typeof(data.name));
+
+        localStorage.setItem('jwt',data.token);
+        localStorage.setItem('userdata',JSON.stringify(data.name));
+ 
+        navigate('/');
 
     }catch(error)
     {

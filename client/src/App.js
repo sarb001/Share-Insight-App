@@ -1,7 +1,7 @@
 import React from 'react';
 import './App.css';
 import Navbar from './Components/Navbar';
-import  { BrowserRouter, Routes ,Route } from 'react-router-dom';
+import  {  Routes ,Route } from 'react-router-dom';
 import Home from './Screens/Home';
 import Signup from './Screens/Signup';
 import Login from './Screens/Login';
@@ -13,7 +13,6 @@ import { ToastContainer } from 'react-toastify';
 function App() {
   return (
     <div className="App">
-      <BrowserRouter>
       <ToastContainer  autoClose = {1000} />
       <Navbar />
        <Routes>
@@ -23,7 +22,6 @@ function App() {
          <Route exact path = "/profile" element = {<Profile />}> </Route>
          <Route exact path = "/createpost" element = {<CreatePost />}> </Route>
        </Routes>
-      </BrowserRouter>
     </div>
   );
 }
