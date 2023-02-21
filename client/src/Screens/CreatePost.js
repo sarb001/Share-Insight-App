@@ -32,7 +32,6 @@ const CreatePost = () => {
                     'Authorization' : `Bearer ${tokenhere}`,
                 }
             }
-            console.log('in between here  --');
 
                 axios.post('/createpost' ,{
                 title,

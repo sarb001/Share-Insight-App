@@ -1,10 +1,41 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import axios from 'axios';
+import { toast } from 'react-toastify';
+import { Datastate } from '../Context/DataProvider';
 
 const Home = () => {
+
+      const { user } = Datastate();
+      console.log('  user in home is ',user);
+      
+      const [data,setdata] = useState([]);
+      const tokenhere = user && (localStorage.getItem('jwt'));
+      console.log(' user jwt is  ',tokenhere);
+
+
+   useEffect(() => {
+      fetch('/allpost' , {
+        method : "get",
+        headers : {
+              "Content-Type"  : "application/json",
+              "Accept" : 'application/json'
+              // 'Authorization' : `Bearer ${tokenhere}`
+        }
+      })
+      
+        .then((res) => console.log('res is',res))
+        .then((result) => { console.log('resultt is' ,result) 
+         setdata(result)
+      })
+   },[])
+
   return (
        <div>
           <div className="outer-home-container" style = {{width:"100%",display:'grid',justifyContent:'center',padding:'1%'}}>
-                <div className = "homepage-container" style = {{display:'grid',gridTemplateRows:'30px 280px 40px 50px 70px',backgroundColor:'wheat',width:'28%',margin:'2%'}}>
+
+                {console.log('inside return issssss- ',data)}
+
+                {/* <div className = "homepage-container" style = {{display:'grid',gridTemplateRows:'30px 280px 40px 50px 70px',backgroundColor:'wheat',width:'28%',margin:'2%'}}>
                     <div className = "homepage-post-container" >
                     
                         <div className="homepage-post-name" style = {{textAlign:'left'}}>
@@ -30,7 +61,8 @@ const Home = () => {
                         </div>
                         
                     </div>
-                </div>
+                </div> */}
+
             </div>
        </div>
   )
