@@ -18,10 +18,12 @@ const DataProvider = ({children}) => {
         console.log('setuser data is',user);
         console.log('setjwt data is',jwt);
 
-        // if(!userdata){
-        //     navigate('/')
-        // }
-    },[navigate])
+        if(!userdata){
+            navigate('/login')
+        }else{
+            navigate('/');
+        }
+    },[user])
 
 return(
     <DataContext.Provider value = {{ user, setuser ,jwt ,setjwt }}>

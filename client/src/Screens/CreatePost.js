@@ -1,5 +1,5 @@
 import axios from 'axios';
-import React ,{ useState}  from 'react';
+import React ,{ useEffect, useState}  from 'react';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { Datastate } from '../Context/DataProvider';
@@ -20,49 +20,53 @@ const CreatePost = () => {
     const tokenhere = user && (localStorage.getItem('jwt'));
     console.log('token here' , tokenhere);
 
-    // console.log(' user is - ',user);
-    // console.log(' jwt data - ',jwt);
+    useEffect(() => {
+       
+      if(url)
+          {
+          try{
+              
+            const config = {
+                headers : {
+                    "Content-Type"  : "application/json",
+                    'Authorization' : `Bearer ${tokenhere}`,
+                }
+            }
+            console.log('in between here  --');
+
+                axios.post('/createpost' ,{
+                title,
+                body,
+                photo : url,
+              },config)
+              .then(response => {  console.log('response iss' ,response)})
+              .catch(error => console.log('error iss',error))
+
+              toast.success(' Post is Created Successfully ')
+              navigate('/');
+      
+          }catch(error)
+            {
+                console.log(' err  while creating post is -',error );
+                toast.error(' Something Went Wrong')
+            }
+          }
+    },[url])
+
 
     const handleimagepost = async() => {
 
-        const data = new FormData()
-        data.append("file",image)
-        data.append("upload_preset","insta-clone")
-        data.append("cloud_name","damnzg3hr")
+                const data = new FormData()
 
-        axios.post('https://api.cloudinary.com/v1_1/damnzg3hr/image/upload' ,data)
-        .then((res) => {
-            console.log('IIIIImage is -',res.data.url);
-            seturl(res.data.url)
-        }).catch((err) => console.log(' Image handle post error is  -',err));      
-        
-          // upload title and body to db 
-          
-          try{
-           
-            const config = {
-                headers : {
-                     "Content-Type"  : "application/json",
-                     'Authorization' : `Bearer ${tokenhere}`,
-                }
-            }
-            console.log('in between here--');
+                data.append("file",image)
+                data.append("upload_preset","insta-clone")
+                data.append("cloud_name","damnzg3hr")
 
-            const { data } = await axios.post('/createpost' , {
-                    title,
-                    body,
-                    photo : url
-            },config)
-
-            console.log('data after selected' , data);
-               toast.success(' Post is Created Successfully ')
-               navigate('/');
-      
-           }catch(error)
-            {
-                 console.log(' err  while creating post is -',error );
-                 toast.error(' Something Went Wrong')
-            }
+               await  axios.post('https://api.cloudinary.com/v1_1/damnzg3hr/image/upload' ,data)
+                .then((res) => {
+                    console.log('IIIIImage is -',res.data.url);
+                    seturl(res.data.url)
+                }).catch((err) => console.log(' Image handle post error is  -',err));      
     }
 
   return (

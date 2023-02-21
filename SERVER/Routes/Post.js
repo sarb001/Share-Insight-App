@@ -8,7 +8,7 @@ const  { ProtectedRoute } = require('../Middleware/ProtectedRoute')
 
 // Create Post here 
 
-router.post('/createpost' , async(req,res) => {
+router.post('/createpost' , ProtectedRoute,async(req,res) => {
 
     try{
         const {title,body,photo} = req.body
