@@ -58,10 +58,17 @@ const CreatePost = () => {
                 const data = new FormData()
 
                 data.append("file",image)
-                data.append("upload_preset","insta-clone")
+                data.append("upload_preset","insta-full-clone")
                 data.append("cloud_name","damnzg3hr")
 
-               await  axios.post('https://api.cloudinary.com/v1_1/damnzg3hr/image/upload' ,data)
+                // const config = {
+                //   headers : {
+                //      "Access-Control-Allow-Origin" : "*",
+                //   },
+                // };
+
+                await  axios.post('https://api.cloudinary.com/v1_1/damnzg3hr/image/upload' 
+               ,data)
                 .then((res) => {
                     console.log('IIIIImage is -',res.data.url);
                     seturl(res.data.url)

@@ -21,11 +21,9 @@ const Home = () => {
               "Accept" : 'application/json'
               // 'Authorization' : `Bearer ${tokenhere}`
         }
-      })
-      
-        .then((res) => console.log('res is',res))
-        .then((result) => { console.log('resultt is' ,result) 
-         setdata(result)
+      }) .then((res) => console.log('res is',res))
+         .then((result) => { console.log('resultt is' ,result) 
+        //  setdata(result)
       })
    },[])
 
