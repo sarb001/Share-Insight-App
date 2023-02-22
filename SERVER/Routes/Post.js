@@ -71,7 +71,6 @@ router.get('/mypost' ,  ProtectedRoute , async(req,res) => {
         console.log('posta Error are--',err);
         res.send({err : ' mypost error occured are '})
     }
-
 })
 
 // for Liking the Post

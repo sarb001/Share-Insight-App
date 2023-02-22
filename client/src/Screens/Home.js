@@ -22,14 +22,82 @@ const Home = () => {
       }
 
         axios.get('/allpost' , config)
-        .then((res) => {  console.log('response  is',res.data.posts);
+        .then((res) => {  console.log('response  iss home',res);
          setdata(res.data.posts)
         })
    },[])
 
+   // like post 
+   const likepost = (id) => {
+    try{      
+      const config = {
+          headers : {
+              "Content-Type"  : "application/json",
+              'Authorization' : `Bearer ${tokenhere}`,
+          }
+      }
+          axios.put('/like' ,{
+          postId : id
+        },config)
+        .then(response => {  
+          console.log(' like resp is  ' ,response)
+
+          const newdata = data.map(item => {        // for updating state of numbers or  2 likes 3 likes
+              if(item._id === response._id){
+                return response
+              }else{  
+                return item
+              }
+          })
+          setdata(newdata)
+        })
+        toast.success(' Liked It .... ')
+      
+    }catch(error)
+      {
+          console.log(' err  while creating post is -',error );
+          toast.error(' Something Went Wrong')
+      }
+    }
+   
+    // dis like post 
+   const unlikepost = (id) => {
+    try{      
+      const config = {
+          headers : {
+              "Content-Type"  : "application/json",
+              'Authorization' : `Bearer ${tokenhere}`,
+          }
+      }
+
+          axios.put('/unlike' ,{
+          postId : id
+        },config)
+        .then(response => {  
+          console.log(' Unlike resp is  ' ,response)
+          
+          const newdata = data.map(item => {        // for updating state of numbers or  2 likes 3 likes
+            if(item._id === response._id){
+              return response
+            }else{  
+              return item
+            }
+        })
+        setdata(newdata)
+      })
+        toast.success(' UnLiked It .... ')
+      
+    }catch(error)
+      {
+          console.log(' err  while Unlike  post is -',error );
+          toast.error(' Something Went Wrong')
+      }
+   }
+
+
   return (
        <div>
-          <div className="outer-home-container" style = {{width:"100%",display:'grid',justifyContent:'center',padding:'1%'}}>
+          <div className="outer-home-container" style = {{width:"100%",display:'grid',justifyContent:'center',padding:'1%',cursor:'pointer'}}>
 
                 {console.log('inside return issssss- ',data)}
                   {data.map(item =>{
@@ -46,7 +114,12 @@ const Home = () => {
                                         </div>
 
                                         <div className="homepage-post-like" style = {{textAlign:'left',padding:'2%'}}> 
-                                              <span> Like logo  </span>
+                                              <span>
+                                              <i className='material-icons' style = {{color:'red'}}> favorite </i>
+                                              <i className='material-icons'  onClick = {() => {likepost(item._id)}}   > thumb_up</i>
+                                              <i className='material-icons'  onClick = {() => {unlikepost(item._id)}} >thumb_down</i>
+                                               </span>
+                                               <span> {item.likes.length} likes </span>
                                         </div>
 
                                         <div className="homepage-post-title" style = {{textAlign:'left',padding:'1%'}}>
