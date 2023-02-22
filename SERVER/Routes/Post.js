@@ -74,4 +74,52 @@ router.get('/mypost' ,  ProtectedRoute , async(req,res) => {
 
 })
 
+// for Liking the Post
+router.put('/like' , ProtectedRoute , async(req,res) => {
+        try{
+
+            Post.findByIdAndUpdate(req.body.postId ,{
+                $push : {likes:req.user._id}
+            },{
+                new: true
+            }).exec((err,result) => {
+                 if(err){
+                    return res.status(422).json({error: err})
+                 }else{
+                    res.json(result)
+                 }
+            })
+
+        }catch(error)
+        { 
+            console.log('Like Error are--',err);
+            res.send({err : ' Like  error occured in '})
+        }
+})
+
+
+// For Unliking the Post 
+router.put('/unlike' , ProtectedRoute , async(req,res) => {
+    try{
+
+        Post.findByIdAndUpdate(req.body.postId ,{
+            $pull : {likes:req.user._id}
+        },{
+            new: true
+        }).exec((err,result) => {
+             if(err){
+                return res.status(422).json({error: err})
+             }else{
+                res.json(result)
+             }
+        })
+
+    }catch(error)
+    { 
+        console.log(' UnLike Error are--',err);
+        res.send({err : ' UnLike  error occured in '})
+    }
+})
+
+
 module.exports = router;
