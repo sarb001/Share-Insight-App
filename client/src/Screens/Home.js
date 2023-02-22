@@ -14,17 +14,19 @@ const Home = () => {
 
 
    useEffect(() => {
-      fetch('/allpost' , {
-        method : "get",
+
+      const config = {
         headers : {
-              "Content-Type"  : "application/json",
-              "Accept" : 'application/json'
-              // 'Authorization' : `Bearer ${tokenhere}`
+          "Content-Type"  : "application/json",
+          "Accept" : 'application/json',
+          'Authorization' : `Bearer ${tokenhere}`
         }
-      }) .then((res) => console.log('res is',res))
-         .then((result) => { console.log('resultt is' ,result) 
-        //  setdata(result)
-      })
+      }
+
+        axios.get('/allpost' , config)
+        .then((res) => {  console.log('res is',res.data.posts);
+         setdata(res)
+        })
    },[])
 
   return (

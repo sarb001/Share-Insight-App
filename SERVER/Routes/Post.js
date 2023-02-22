@@ -46,9 +46,10 @@ router.post('/createpost' , ProtectedRoute,async(req,res) => {
 router.get('/allpost' , async(req,res) => {
 
      try{
-        const getposts = await Post.find().populate("postedBy","_id name");
-        console.log('get posts ssssshrtr', getposts);
-        res.send(' fetched all postsssss ')
+         await Post.find().populate("postedBy","_id name")
+         .then(  posts => res.json({posts})   )
+        // console.log('  get posts here ', getposts);
+        // res.send(' fetched all postsssss ')
 
      }catch(err)
      {
@@ -64,10 +65,8 @@ router.get('/mypost' ,  ProtectedRoute , async(req,res) => {
     try
     {
         const { _id } = req.user._id;
-        const mypost = await Post.find({postedBy : _id}).populate("postedBy" , "_id name")
-
-        console.log('my posts are -',mypost);
-        res.send(' ok my route  ')
+        await Post.find({postedBy : _id}).populate("postedBy" , "_id name")
+        .then(mypost => {  res.json({mypost}) }  )    
         
     }catch(err)
     {
