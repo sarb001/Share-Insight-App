@@ -1,6 +1,32 @@
-import React from 'react'
+import axios from 'axios';
+import React, { useEffect, useState } from 'react'
+import { Datastate } from '../Context/DataProvider';
 
 const Profile = () => {
+
+   const [mypics,setpics] = useState([]);
+   const { user } = Datastate();
+   console.log(' user is here ',user);
+
+   const tokenhere = user && (localStorage.getItem('jwt'));
+   console.log('token here' , tokenhere);
+
+
+    useEffect(() => {
+      const config = {
+        headers : {
+          "Content-Type"  : "application/json",
+          "Authorization" : `Bearer ${tokenhere}`
+        }
+      }
+
+        axios.get('/mypost' , config)
+        .then((result) => {  console.log(' myposts are  ',result);
+         setpics(result.data.mypost)
+        })
+   },[])
+
+
   return (
     <>
       <div className="post-outercontainer" style = {{Width:'60%',display:'grid',padding:'1% 15%'}}>   
@@ -10,7 +36,7 @@ const Profile = () => {
                <span> <img src =  "/Profile-img.png"  alt = "profile-img" style = {{width:'70%'}} /> </span>
               </div>
               <div className="profile-name"> 
-             <div> <h4> ramesh verma </h4>  </div>
+             <div> <h4> {user}</h4>  </div>
              <div> 
                <span> 40 posts </span>
                <span> 40 followers </span>
@@ -20,12 +46,15 @@ const Profile = () => {
          </div>   
 
           <div className="user-profile-images" style = {{paddingTop:'4%'}}>
-             <span> <img src =  "/Profile-img.png"  alt = "profile-img"  style = {{width:'25%'}} /> </span>
-             <span> <img src =  "/Profile-img.png"  alt = "profile-img"  style = {{width:'25%'}} /> </span>
-             <span> <img src =  "/Profile-img.png"  alt = "profile-img"  style = {{width:'25%'}} /> </span>
-             <span> <img src =  "/Profile-img.png"  alt = "profile-img"  style = {{width:'25%'}} /> </span>
-             <span> <img src =  "/Profile-img.png"  alt = "profile-img"  style = {{width:'25%'}} /> </span>
-             <span> <img src =  "/Profile-img.png"  alt = "profile-img"  style = {{width:'25%'}} /> </span>
+            {mypics && mypics.map((item) => {
+                 return (
+                  <>
+                   <span style  = {{display:'grid',gridTemplateColumns:'1fr',margin:'5%'}}> 
+                    <img src =  {item.photo}  alt = "profile-img"  style = {{width:'30%'}} /> 
+                  </span>
+                  </>
+                 )
+            })}
           </div>
       </div>
     </>
