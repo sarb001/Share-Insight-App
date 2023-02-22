@@ -43,13 +43,11 @@ router.post('/createpost' , ProtectedRoute,async(req,res) => {
 
 // All posts like at home page of insta 
 
-router.get('/allpost' , async(req,res) => {
+router.get('/allpost' ,  async(req,res) => {
 
      try{
          await Post.find().populate("postedBy","_id name")
-         .then(  posts => res.json({posts})   )
-        // console.log('  get posts here ', getposts);
-        // res.send(' fetched all postsssss ')
+         .then(  posts => res.json({posts}))
 
      }catch(err)
      {

@@ -18,14 +18,12 @@ const Home = () => {
       const config = {
         headers : {
           "Content-Type"  : "application/json",
-          "Accept" : 'application/json',
-          'Authorization' : `Bearer ${tokenhere}`
         }
       }
 
         axios.get('/allpost' , config)
-        .then((res) => {  console.log('res is',res.data.posts);
-         setdata(res)
+        .then((res) => {  console.log('response  is',res.data.posts);
+         setdata(res.data.posts)
         })
    },[])
 
@@ -34,35 +32,44 @@ const Home = () => {
           <div className="outer-home-container" style = {{width:"100%",display:'grid',justifyContent:'center',padding:'1%'}}>
 
                 {console.log('inside return issssss- ',data)}
+                  {data.map(item =>{
 
-                {/* <div className = "homepage-container" style = {{display:'grid',gridTemplateRows:'30px 280px 40px 50px 70px',backgroundColor:'wheat',width:'28%',margin:'2%'}}>
-                    <div className = "homepage-post-container" >
-                    
-                        <div className="homepage-post-name" style = {{textAlign:'left'}}>
-                          <span style = {{padding:'2%'}}>  ramesh  </span>
-                        </div>
+                     return(
+                       <div className = "homepage-container" style = {{display:'grid',gridTemplateRows:'30px 280px 40px 50px 70px',backgroundColor:'wheat',width:'28%',margin:'2%'}}>
+                               <div className = "homepage-post-container" >
+                                        <div className="homepage-post-name" style = {{textAlign:'left'}}>
+                                          {/* <span style = {{padding:'2%'}}>  {item.postedBy.name}  </span> */}
+                                        </div>
 
-                        <div className="homepage-post-image">
-                          <span> <img src = "/homepage-img.jpg"  alt = "homepage" style = {{width:'100%'}} />  </span>
-                        </div>
+                                        <div className="homepage-post-image">
+                                          <span> <img src = {item.photo}  alt = "homepage" style = {{width:'100%'}} />  </span>
+                                        </div>
 
-                        <div className="homepage-post-like" style = {{textAlign:'left',padding:'2%'}}> 
-                              <span> Like logo  </span>
-                        </div>
+                                        <div className="homepage-post-like" style = {{textAlign:'left',padding:'2%'}}> 
+                                              <span> Like logo  </span>
+                                        </div>
 
-                        <div className="homepage-post-title" style = {{textAlign:'left',padding:'1%'}}>
-                              <span> This is amazing post  </span>
-                        </div>
+                                        <div className="homepage-post-title" style = {{textAlign:'left',padding:'1%'}}>
+                                              <span> {item.title} </span>
+                                        </div>
 
-                        <div className="homepage-post-comment" style = {{padding:'1% 5%'}}>
-                            <span>  
-                              <input type = "text" placeholder = 'Add a Comment...'  />
-                            </span>
-                        </div>
-                        
-                    </div>
-                </div> */}
+                                        <div className="homepage-post-body" style = {{textAlign:'left',padding:'1%'}}>
+                                              <span> {item.body} </span>
+                                        </div>
 
+                                        <div className="homepage-post-comment" style = {{padding:'1% 5%'}}>
+                                            <span>  
+                                              <input type = "text" placeholder = 'Add a Comment...'  />
+                                            </span>
+                                        </div>
+                                  
+                              </div>
+                      </div> 
+                     )
+                  })}
+
+
+              
             </div>
        </div>
   )
