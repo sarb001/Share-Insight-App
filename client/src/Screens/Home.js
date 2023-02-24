@@ -62,6 +62,7 @@ const Home = () => {
    
     // dis like post 
    const unlikepost = (id) => {
+
     try{      
       const config = {
           headers : {
@@ -75,7 +76,7 @@ const Home = () => {
         },config)
         .then(response => {  
           console.log(' Unlike resp is  ' ,response)
-          
+
           const newdata = data.map(item => {        // for updating state of numbers or  2 likes 3 likes
             if(item._id === response._id){
               return response
@@ -94,19 +95,54 @@ const Home = () => {
       }
    }
 
+   // for Comments
+   const makecomment = (text,postId) => {
+
+    try{      
+      const config = {
+          headers : {
+              "Content-Type"  : "application/json",
+              'Authorization' : `Bearer ${tokenhere}`,
+          }
+      }
+
+          axios.put('/comment' ,{
+          postId,
+          text
+        },config)
+        .then(response => {  
+          console.log(' Comment  resp is  ' ,response)
+
+          const newdata = data.map(item => {       
+            if(item._id === response._id){
+              return response
+            }else{  
+              return item
+            }
+        })
+        setdata(newdata)
+      })
+        toast.success(' Commented  It Here  .... ')
+      
+    }catch(error)
+      {
+          console.log(' err  while  Comment  is -',error );
+          toast.error(' Something Went Wrong')
+      }
+    }
 
   return (
        <div>
           <div className="outer-home-container" style = {{width:"100%",display:'grid',justifyContent:'center',padding:'1%',cursor:'pointer'}}>
 
                 {console.log('inside return issssss- ',data)}
-                  {data.map(item =>{
 
+                  {data.map(item =>  {
                      return(
                        <div className = "homepage-container" style = {{display:'grid',gridTemplateRows:'30px 280px 40px 50px 70px',backgroundColor:'wheat',width:'28%',margin:'2%'}}>
                                <div className = "homepage-post-container" >
                                         <div className="homepage-post-name" style = {{textAlign:'left'}}>
-                                          {/* <span style = {{padding:'2%'}}>  {item.postedBy.name}  </span> */}
+                                          <span style = {{padding:'2%'}}>  {item.postedBy.name}  </span>
                                         </div>
 
                                         <div className="homepage-post-image">
@@ -130,9 +166,21 @@ const Home = () => {
                                               <span> {item.body} </span>
                                         </div>
 
+                                         {item.comments.map(record => {
+                                            return(
+                                              <h6> {record.text} -By {item.postedBy.name} </h6>
+                                            )
+                                         })}
+
                                         <div className="homepage-post-comment" style = {{padding:'1% 5%'}}>
                                             <span>  
-                                              <input type = "text" placeholder = 'Add a Comment...'  />
+                                              <form onSubmit = {(e) => {
+                                                 e.preventDefault()
+                                                 makecomment(e.target[0].value,item._id)
+                                                 console.log(e.target[0].value)
+                                              }}>
+                                                 <input type = "text" placeholder = 'Add a Comment...'  />
+                                              </form>
                                             </span>
                                         </div>
                                   
