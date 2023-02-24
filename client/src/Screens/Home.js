@@ -131,6 +131,35 @@ const Home = () => {
       }
     }
 
+  // for Delete 
+  const  deletepost = (postid) => {
+
+    try{      
+      const config = {
+          headers : {
+              "Content-Type"  : "application/json",
+              'Authorization' : `Bearer ${tokenhere}`,
+          }
+      }
+
+          axios.delete(`/deletepost/${postid}`,config)
+         .then(result => {  
+          console.log(' Delete data Response  is -' ,result)
+          const newdata = data.filter(item => {       // logic for Deletion
+            return item._id !== result._id
+          })
+          setdata(newdata)
+        })
+        toast.success(' Post  Deleted  ')
+      
+    }catch(error)
+      {
+          console.log(' err  while Unlike  post is -',error );
+          toast.error(' Something Went Wrong')
+      }
+   }
+
+
   return (
        <div>
           <div className="outer-home-container" style = {{width:"100%",display:'grid',justifyContent:'center',padding:'1%',cursor:'pointer'}}>
@@ -141,8 +170,9 @@ const Home = () => {
                      return(
                        <div className = "homepage-container" style = {{display:'grid',gridTemplateRows:'30px 280px 40px 50px 70px',backgroundColor:'wheat',width:'28%',margin:'2%'}}>
                                <div className = "homepage-post-container" >
-                                        <div className="homepage-post-name" style = {{textAlign:'left'}}>
+                                        <div className="homepage-post-name" style = {{display:'grid',gridTemplateColumns:'1fr 1fr'}}>
                                           <span style = {{padding:'2%'}}>  {item.postedBy.name}  </span>
+                                          <span> {item.postedBy.name} <i className='material-icons' style = {{color:'black'}} onClick = {() => deletepost(item._id)} > delete</i> </span>
                                         </div>
 
                                         <div className="homepage-post-image">
