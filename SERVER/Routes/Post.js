@@ -8,7 +8,7 @@ const  { ProtectedRoute } = require('../Middleware/ProtectedRoute')
 
 // Create Post here 
 
-router.post('/createpost' , ProtectedRoute,async(req,res) => {
+router.post('/createpost' , ProtectedRoute, async(req,res) => {
 
     try{
         const {title,body,photo} = req.body
@@ -57,8 +57,8 @@ router.get('/allpost' ,  async(req,res) => {
 })
 
 // For Specific User Logged in Post Show here 
-
-router.get('/mypost' ,  ProtectedRoute , async(req,res) => {
+ 
+router.get('/mypost' ,   ProtectedRoute , async(req,res) => {
 
     try
     {
@@ -74,7 +74,7 @@ router.get('/mypost' ,  ProtectedRoute , async(req,res) => {
 })
 
 // for Liking the Post
-router.put('/like' , ProtectedRoute , async(req,res) => {
+router.put('/like' ,      ProtectedRoute , async(req,res) => {
         try{
 
             Post.findByIdAndUpdate(req.body.postId ,{
@@ -98,7 +98,7 @@ router.put('/like' , ProtectedRoute , async(req,res) => {
 
 
 // For Unliking the Post 
-router.put('/unlike' , ProtectedRoute , async(req,res) => {
+router.put('/unlike' ,   ProtectedRoute , async(req,res) => {
     try{
 
         Post.findByIdAndUpdate(req.body.postId ,{
@@ -121,7 +121,7 @@ router.put('/unlike' , ProtectedRoute , async(req,res) => {
 })
 
 //for Comment 
-router.put('/comment' , ProtectedRoute , (req,res) => {
+router.put('/comment' ,   ProtectedRoute , (req,res) => {
     try{
         const comment = {
             text : req.body.text,

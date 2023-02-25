@@ -7,13 +7,12 @@ const User = require('./Models/User');
 
 app.use(express.json());            // to parse Request 
 
-
 require('./Models/User')
 require('./Models/Post')
 
 app.use(require('./Routes/auth'));          // It is Middleware 
 app.use(require('./Routes/Post'));
-
+app.use(require('./Routes/user'));
 
 dotenv.config();
 const mongourl = process.env.MONGO_URL;

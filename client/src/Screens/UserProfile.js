@@ -1,33 +1,45 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
+import { useParams } from 'react-router-dom';
 import { Datastate } from '../Context/DataProvider';
 
-const Profile = () => {
+const UserProfile = () => {
 
-   const [mypics,setpics] = useState([]);
-   const { user } = Datastate();
-   console.log(' user is here ',user);
+   const [profile,setprofile] = useState([]);
+   const [mypics,setmypics] = useState([]);
+
+  //  const { user } = Datastate();
+//    console.log(' user is here ',user);
+
+    console.log(' UserProfile herherherhehrher ')
+    const { userid } = useParams();
+
+   console.log('userrrrrr id is ',userid);
 
    const tokenhere = user && (localStorage.getItem('jwt'));
    console.log('token here' , tokenhere);
 
     useEffect(() => {
-      const config = {
+        const config = {
         headers : {
-          "Content-Type"  : "application/json",
-          "Authorization" : `Bearer ${tokenhere}`
+            "Content-Type"  : "application/json",
+            "Authorization" : `Bearer ${tokenhere}`
         }
-      }
+        }
 
-        axios.get('/mypost' , config)
-        .then((result) => {  console.log(' myposts are  ',result);
-         setpics(result.data.mypost)
+        axios.get(`/user/${userid}` , config)
+        .then((result) => {  console.log(' UserProfile are - ',result);
         })
-   },[])
+    },[])
 
 
   return (
     <>
+
+            <h1>  IN the User Profile   </h1>
+
+
+{/* 
       <div className="post-outercontainer" style = {{Width:'60%',display:'grid',padding:'1% 15%'}}>   
 
          <div className = "profile-partition" style = {{display:'grid',gridTemplateColumns:'200px 1fr',paddingTop:'5%',borderBottom:'2px solid black'}}> 
@@ -35,7 +47,7 @@ const Profile = () => {
                <span> <img src =  "/Profile-img.png"  alt = "profile-img" style = {{width:'70%'}} /> </span>
               </div>
               <div className="profile-name"> 
-             <div> <h4> {user}</h4>  </div>
+             <div> <h4> {user} </h4>  </div>
              <div> 
                <span> 40 posts </span>
                <span> 40 followers </span>
@@ -45,7 +57,7 @@ const Profile = () => {
          </div>   
 
           <div className="user-profile-images" style = {{paddingTop:'4%'}}>
-            {mypics && mypics.map((item) => {
+            {/* {mypics && mypics.map((item) => {
                  return (
                   <>
                    <span style  = {{display:'grid',gridTemplateColumns:'1fr',margin:'5%'}}> 
@@ -53,11 +65,14 @@ const Profile = () => {
                   </span>
                   </>
                  )
-            })}
-          </div>
-      </div>
+            })} */}
+          {/* </div> */}
+      {/* </div> */}
+
+ {/* */}
+
     </>
   )
 }
 
-export default Profile
+export default UserProfile 
