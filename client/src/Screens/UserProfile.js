@@ -35,7 +35,6 @@ const UserProfile = () => {
           console.log(' axios inside is ',res.data)
           setuserprofile(res)
          })
-        // console.log(' axios respponse is  ',response);
     }
 
   return (
@@ -49,23 +48,29 @@ const UserProfile = () => {
                <> 
                   <div>
 
-                    {/* <h4> Name is -- {userprofile.user.name} </h4> */}
-                  {/* <h1>  Inside  the User Profile   </h1>
-                  <h4> Email  is -- {userprofile.user.email} </h4>
+                   <h4> Name iis -- {userprofile.data.user.name} </h4>
+
+
+                  <h3>  Inside  the User Profile   </h3>
+                  <h4> Email  is -- {userprofile.data.user.email} </h4>
                   
-                  <h4> Length  is -- {userprofile.posts.length}  posts </h4> */}
+                  <h4> Length  is -- {userprofile.data.posts.length}  posts </h4>
+                  {/* <h4> Photos  areee -- {userprofile.data.posts.photo} Photos  </h4>/ */}
 
                     <h6> Show Photos here  </h6>
-                {/* <div className = "gallery">
+                <div className = "gallery">
 
                   {
-                      userprofile.posts.map(item => {
+                      userprofile.data.posts.map(item => {
                         return (
-                          <img  src = {item.photo} />
+                          <>
+                            <h4> Body is - {item.body} </h4> 
+                            <img  key = {item._id} src = {item.photo}  alt = {item.title} style = {{width:'20%'}} />
+                          </>
                         )
                       })
                   }
-                </div> */}
+                </div>
                   </div>
 
                </>) : (<>
