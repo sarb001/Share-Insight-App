@@ -11,18 +11,18 @@ const DataProvider = ({children}) => {
 
     useEffect(() => {
         const userdata = (localStorage.getItem('userdata'));
-        const jwtdata = (localStorage.getItem('jwt'));
+        const jwtdata =  (localStorage.getItem('jwt'));
         setuser(userdata);
         setjwt(jwtdata);
 
         console.log('setuser data is',user);
         console.log('setjwt data is',jwt);
 
-        if(!userdata){
-            navigate('/login')
-        }else{
-            navigate('/');
-        }
+        // if(!userdata){
+        //     navigate('/login')
+        // }else{
+        //     navigate('/');
+        // }
     },[user])
 
 return(

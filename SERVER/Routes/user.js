@@ -9,45 +9,27 @@ const Post  = mongoose.model('Post');
 
 const  { ProtectedRoute } = require('../Middleware/ProtectedRoute')
 
-
-router.get('/user/:userid' ,ProtectedRoute, (req,res) => {
-
-    try
-    {
-        res.status(200).json({message: ' INSIDE THE route  '})
-        console.log('inside route');
+router.get('/user/:id' ,ProtectedRoute, async(req,res) => {
+        try{
+                  await  User.findOne({_id : req.params.id})
+                  .select("-password")
+                        .then(user => {
+                             Post.find({postedBy: req.params.id})  
+                            .populate("postedBy" , "_id name")
+                            .exec((err,posts) => {
+                                if(err){
+                                    return res.status(422).json({error : 'Err , Post Not Present'})
+                                }
+                                res.json({user,posts})
+                                console.log(' inssssside user here ',user)
+                             })
+                      })
 
     }catch(error)
     {
-        console.log(' Not able to Found User',err);
+        console.log(' Not able to Found User',error);
         return  res.status(422).json({error : ' Error hai bhaii  '})
     }
-
 })
-
-// router.get('/user/:id',  (req,res) => {
-
-//     try{
-//         User.findOne({_id : req.params.id})
-//         .select("-password")
-//         .then(user => {
-//             Post.find({postedBy: req.params.id})  
-//             .populate("postedBy" , "_id name")
-//             .exec((err,posts) => {
-//                 if(err){
-//                     return res.status(422).json({error : err})
-//                 }
-//                 res.json({user,posts})
-//                 console.log(' inaide user here ',user)
-//             })
-//       })
-
-
-//     }catch(error){
-//         console.log(' Not able to Found User',err);
-//         res.send({err : ' User not Found  '}) 
-//     }
-// })
-
 
 module.exports = router;

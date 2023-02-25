@@ -5,39 +5,76 @@ import { Datastate } from '../Context/DataProvider';
 
 const UserProfile = () => {
 
-   const [profile,setprofile] = useState([]);
-   const [mypics,setmypics] = useState([]);
+   const [userprofile,setuserprofile] = useState(null);
 
-  //  const { user } = Datastate();
-//    console.log(' user is here ',user);
+   const { user } = Datastate();
+   console.log(' User is Existed  ',user);
 
-    console.log(' UserProfile herherherhehrher ')
+    console.log(' UserProfile Component Starts  ')
     const { userid } = useParams();
 
    console.log('userrrrrr id is ',userid);
 
-   const tokenhere = user && (localStorage.getItem('jwt'));
-   console.log('token here' , tokenhere);
+   const tokenhere = (localStorage.getItem('jwt'));
+   console.log('token here in UserProfile ' , tokenhere);
 
     useEffect(() => {
-        const config = {
-        headers : {
-            "Content-Type"  : "application/json",
-            "Authorization" : `Bearer ${tokenhere}`
-        }
+        loadata();
+    })
+
+    const loadata = async() => {
+      const config = {
+          headers : {
+              "Content-Type"  : "application/json",
+              "Authorization" : `Bearer ${tokenhere}`
+          }
         }
 
-        axios.get(`/user/${userid}` , config)
-        .then((result) => {  console.log(' UserProfile are - ',result);
-        })
-    },[])
-
+        const response = await axios.get(`/user/${userid}`,config)
+        .then(res => {
+          console.log(' axios inside is ',res.data)
+          setuserprofile(res)
+         })
+        // console.log(' axios respponse is  ',response);
+    }
 
   return (
     <>
 
-            <h1>  IN the User Profile   </h1>
 
+          <h4>  Inside the User Profile   </h4>
+
+            {
+               userprofile ?  (
+               <> 
+                  <div>
+
+                    {/* <h4> Name is -- {userprofile.user.name} </h4> */}
+                  {/* <h1>  Inside  the User Profile   </h1>
+                  <h4> Email  is -- {userprofile.user.email} </h4>
+                  
+                  <h4> Length  is -- {userprofile.posts.length}  posts </h4> */}
+
+                    <h6> Show Photos here  </h6>
+                {/* <div className = "gallery">
+
+                  {
+                      userprofile.posts.map(item => {
+                        return (
+                          <img  src = {item.photo} />
+                        )
+                      })
+                  }
+                </div> */}
+                  </div>
+
+               </>) : (<>
+                  <h1>  Loading...... </h1>
+               </>)
+            }
+
+
+          
 
 {/* 
       <div className="post-outercontainer" style = {{Width:'60%',display:'grid',padding:'1% 15%'}}>   
