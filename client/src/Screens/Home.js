@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import axios from 'axios';
 import { toast } from 'react-toastify';
 import { Datastate } from '../Context/DataProvider';
+import { Link } from 'react-router-dom';
 
 const Home = () => {
 
@@ -170,9 +171,21 @@ const Home = () => {
                      return(
                        <div className = "homepage-container" style = {{display:'grid',gridTemplateRows:'30px 280px 40px 50px 70px',backgroundColor:'wheat',width:'28%',margin:'2%'}}>
                                <div className = "homepage-post-container" >
-                                        <div className="homepage-post-name" style = {{display:'grid',gridTemplateColumns:'1fr 1fr'}}>
-                                          <span style = {{padding:'2%'}}>  {item.postedBy.name}  </span>
-                                          <span> {item.postedBy.name} <i className='material-icons' style = {{color:'black'}} onClick = {() => deletepost(item._id)} > delete</i> </span>
+
+                                        <div className = "homepage-post-name" style = {{display:'grid',gridTemplateColumns:'1fr 1fr'}}>
+                                            {/*  If post id  is not equal to  request or Logged user id  */}
+                                            {/*  then - post ismade by other user or canbe follower so move to other page  */}
+                                            {/*  OtherWise it may be  Logged user and move it to Existing Logged User Profile Page   */}
+                                            {/* <Link  to = { item.postedBy._id  !== req.user._id ? "/profile/" + item.postedBy._id : "/profile"}> 
+                                            {item.postedBy.name} </Link>   */}
+
+                                            <Link to = {"/profile/" + item.postedBy._id}>
+                                              <span style = {{padding:'2%'}}>  {item.postedBy.name}  </span>
+                                            </Link>
+
+                                            <span> 
+                                           <i className='material-icons' style = {{color:'black'}} 
+                                           onClick = {() => deletepost(item._id)} > delete </i> </span>
                                         </div>
 
                                         <div className="homepage-post-image">
@@ -217,10 +230,7 @@ const Home = () => {
                               </div>
                       </div> 
                      )
-                  })}
-
-
-              
+                  })}              
             </div>
        </div>
   )
