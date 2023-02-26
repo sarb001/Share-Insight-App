@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import { Datastate } from '../Context/DataProvider';
 
 const UserProfile = () => {
@@ -37,40 +38,60 @@ const UserProfile = () => {
          })
     }
 
+    const followuser = async() => {
+
+      const config = {
+        headers : {
+            "Content-Type"  : "application/json",
+            "Authorization" : `Bearer ${tokenhere}`
+        }
+      }
+        const res =  await axios.put('/follow', {
+          followId : userid
+        },config)
+        .then(resdata => {
+          console.log(' follow user is ',resdata);
+        })
+          // 
+        toast.success(' User Has  Been Followed  ')
+    }
+
   return (
     <>
-
-
-          <h4>  Inside the User Profile   </h4>
-
+          <h5>  Inside the New User Profile   </h5>
             {
                userprofile ?  (
                <> 
+                  <div style  = {{display:'grid',gridTemplateColumns:'1fr 1fr'}}>
+                    <div className="first-side"> 
+                     <span style  = {{fontSize:'28px'}}> Username is -
+                      {userprofile.data.user.name} </span>
+                     <h6> Email - {userprofile.data.user.email} </h6>
+                     <div className="follwers-section" style = {{display:'grid',gridTemplateColumns:'100px 190px 100px',margin:'4% 16%',fontSize:'18px'}}>
+                       <span> {userprofile.data.posts.length}  posts </span>
+                       <span>  0 followers </span>
+                       <span>  0 following  </span>
+                     </div>
+
                   <div>
+                    <button onClick = {() => followuser()}>  Follow  </button>
+                  </div>
+                    </div>
+                   
+                  <div className = "gallery">
+                            {
+                                userprofile.data.posts.map(item => {
+                                  return (
+                                    <>
+                                      <div style = {{margin:'4% 5%'}}>
+                                        <img  key = {item._id} src = {item.photo}  alt = {item.title} style = {{width:'50%'}} />
+                                      </div>
+                                    </>
+                                  )
+                                })
+                            }
+                    </div>
 
-                   <h4> Name iis -- {userprofile.data.user.name} </h4>
-
-
-                  <h3>  Inside  the User Profile   </h3>
-                  <h4> Email  is -- {userprofile.data.user.email} </h4>
-                  
-                  <h4> Length  is -- {userprofile.data.posts.length}  posts </h4>
-                  {/* <h4> Photos  areee -- {userprofile.data.posts.photo} Photos  </h4>/ */}
-
-                    <h6> Show Photos here  </h6>
-                <div className = "gallery">
-
-                  {
-                      userprofile.data.posts.map(item => {
-                        return (
-                          <>
-                            <h4> Body is - {item.body} </h4> 
-                            <img  key = {item._id} src = {item.photo}  alt = {item.title} style = {{width:'20%'}} />
-                          </>
-                        )
-                      })
-                  }
-                </div>
                   </div>
 
                </>) : (<>
