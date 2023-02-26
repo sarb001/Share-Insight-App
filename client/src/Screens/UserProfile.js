@@ -6,7 +6,9 @@ import { Datastate } from '../Context/DataProvider';
 
 const UserProfile = () => {
 
-   const [userprofile,setuserprofile] = useState(null);
+   const [userprofile,setuserprofile] = useState(null);   // For updating  followers 
+
+   const [showfollower,setshowfollower] = useState(true);   // For Chainging Button Side 
 
    const { user } = Datastate();
    console.log(' User is Existed  ',user);
@@ -38,6 +40,7 @@ const UserProfile = () => {
          })
     }
 
+
     const followuser = async() => {
 
       const config = {
@@ -52,10 +55,53 @@ const UserProfile = () => {
         .then(resdata => {
           console.log(' follow user is ',resdata);
           localStorage.setItem('user',JSON.stringify(resdata.data))
+          setuserprofile((prevstate) => {
+              return {
+                 ...prevstate,
+                 user : {
+                  ...prevstate.user,
+                  followers: [...prevstate.data.user.followers,resdata.data._id]
+                 }
+              }
+          })
+          setshowfollower(false)
         })
           // 
         toast.success(' User Has  Been Followed  ')
     }
+
+
+     const unfollowuser = async() => {
+
+      const config = {
+        headers : {
+            "Content-Type"  : "application/json",
+            "Authorization" : `Bearer ${tokenhere}`
+        }
+      }
+
+        const res =  await axios.put('/unfollow', {
+          unfollowId : userid
+        },config)
+        .then(resdata => {
+          console.log(' unfollow user is ',resdata);
+          localStorage.setItem('user',JSON.stringify(resdata.data))
+          setuserprofile((prevstate) => {
+              return {
+                 ...prevstate,
+                 user : {
+                  ...prevstate.user,
+                  followers: [...prevstate.data.user.followers,resdata.data._id]
+                 }
+              }
+          })
+        })
+          // 
+        toast.success(' User Has  Been UnFollowed  ')
+    }
+
+     
+
 
   return (
     <>
@@ -75,7 +121,15 @@ const UserProfile = () => {
                      </div>
 
                   <div>
-                    <button onClick = {() => followuser()}>  Follow  </button>
+                    {
+                      showfollower ? (
+                      <>
+                         <button onClick = {() => followuser()}>  Follow  </button>    
+                      </>) : (
+                      <>
+                     <button onClick = {() => unfollowuser()}>  UnFollow  </button>
+                      </>)
+                    }
                   </div>
                     </div>
                    
