@@ -86,12 +86,15 @@ const UserProfile = () => {
         .then(resdata => {
           console.log(' unfollow user is ',resdata);
           localStorage.setItem('user',JSON.stringify(resdata.data))
+
           setuserprofile((prevstate) => {
+            // Remove the Last added id or User 
+            const removeFollower = prevstate.data.user.followers.filter(item => item != resdata.data._id)
               return {
                  ...prevstate,
                  user : {
                   ...prevstate.user,
-                  followers: [...prevstate.data.user.followers,resdata.data._id]
+                  followers: removeFollower
                  }
               }
           })
