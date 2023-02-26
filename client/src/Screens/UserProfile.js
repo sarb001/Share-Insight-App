@@ -33,7 +33,7 @@ const UserProfile = () => {
 
         const response = await axios.get(`/user/${userid}`,config)
         .then(res => {
-          console.log(' axios inside is ',res.data)
+          console.log(' ressssssss isss',res.data)
           setuserprofile(res)
          })
     }
@@ -51,6 +51,7 @@ const UserProfile = () => {
         },config)
         .then(resdata => {
           console.log(' follow user is ',resdata);
+          localStorage.setItem('user',JSON.stringify(resdata.data))
         })
           // 
         toast.success(' User Has  Been Followed  ')
@@ -69,8 +70,8 @@ const UserProfile = () => {
                      <h6> Email - {userprofile.data.user.email} </h6>
                      <div className="follwers-section" style = {{display:'grid',gridTemplateColumns:'100px 190px 100px',margin:'4% 16%',fontSize:'18px'}}>
                        <span> {userprofile.data.posts.length}  posts </span>
-                       <span>  0 followers </span>
-                       <span>  0 following  </span>
+                       <span> {userprofile.data.user.followers.length} followers </span>
+                       <span> {userprofile.data.user.following} following  </span>
                      </div>
 
                   <div>

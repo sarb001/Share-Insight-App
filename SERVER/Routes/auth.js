@@ -67,7 +67,6 @@ router.post('/login' ,async(req,res) => {
         }
     
         const user = await User.findOne({email});
-
         const comparepass = await bcrypt.compare(password,user.password);
     
         if(!comparepass){
@@ -77,10 +76,9 @@ router.post('/login' ,async(req,res) => {
         if(user && (comparepass))
         {
              res.status(200).json({
-                _id : user._id,
-                name : user.name,
+                _id   : user._id,
+                name  : user.name,
                 email : user.email,
-                password : user.password,
                 token : JsonToken(user._id)
              })
         }else

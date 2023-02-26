@@ -28,7 +28,7 @@ const Login = () => {
         console.log(' Full DDDDDDDD -',data);
         console.log(' data name is -', (data.name));
         localStorage.setItem('jwt',data.token);
-        localStorage.setItem('userdata',JSON.stringify(data));
+        localStorage.setItem('user',JSON.stringify(data));
  
         navigate('/');
     }catch(error)
