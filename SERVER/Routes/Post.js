@@ -36,9 +36,9 @@ router.post('/createpost' , ProtectedRoute, async(req,res) => {
             res.status(400).json({error : ' Not able to  Create Post  '})
         }
     
-}catch(error) {
-    res.json({error : ' Wrong Credentials '})
-    }
+    }catch(error) {
+        res.json({error : ' Wrong Credentials '})
+        }
 })
 
 // All posts like at home page of insta 
@@ -47,7 +47,7 @@ router.get('/allpost' ,  async(req,res) => {
 
      try{
          await Post.find().populate("postedBy","_id name")
-         .then(  posts => res.json({posts}))
+         .then(posts => res.json({posts}))
 
      }catch(err)
      {

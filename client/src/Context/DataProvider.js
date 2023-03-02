@@ -10,7 +10,7 @@ const DataProvider = ({children}) => {
     const navigate = useNavigate();
 
     useEffect(() => {
-        const userdata = (localStorage.getItem('userdata'));
+        const userdata = (localStorage.getItem('user'));
         const jwtdata =  (localStorage.getItem('jwt'));
         setuser(userdata);
         setjwt(jwtdata);

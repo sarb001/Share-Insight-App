@@ -11,7 +11,7 @@ const Navbar = () => {
   console.log(' user for nav is ',user);
 
   const logouthandler = () => {
-     localStorage.removeItem('userdata');
+     localStorage.removeItem('user');
      localStorage.removeItem('jwt');
      toast.success(' User has  been  Logged Out ');
      navigate('/login');
