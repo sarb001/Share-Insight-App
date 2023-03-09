@@ -74,12 +74,12 @@ const CreatePost = () => {
                     seturl(res.data.url)
                 }).catch((err) => console.log(' Image handle post error is  -',err));      
     }
-
   return (
     <div>
             <div className="createpost-outercontainer" style = {{display:'flex',justifyContent:"center"}}>
                     <div className = "createpost-container" style = {{width:'30%',padding:'3%',backgroundColor :'wheat'}}>
-                        <input type = "text" placeholder = 'Enter Title...'   value = {title}  onChange = {(e) =>  settitle(e.target.value)} />
+                        <input type = "text" placeholder = 'Enter Title...'   value = {title} 
+                         onChange = {(e) =>  settitle(e.target.value)} />
                         <input type = "text" placeholder = 'Enter Body...'    value = {body}   onChange = {(e) =>  setbody(e.target.value)} />
                   
                              <label htmlFor = "file-upload" id = "file-upload">

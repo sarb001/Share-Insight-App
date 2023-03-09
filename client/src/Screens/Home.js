@@ -30,6 +30,7 @@ const Home = () => {
 
    // like post 
    const likepost = (id) => {
+    
     try{      
       const config = {
           headers : {

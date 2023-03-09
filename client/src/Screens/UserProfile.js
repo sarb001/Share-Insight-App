@@ -7,11 +7,10 @@ import { Datastate } from '../Context/DataProvider';
 const UserProfile = () => {
 
    const [userprofile,setuserprofile] = useState(null);   // For updating  followers 
-
    const [showfollower,setshowfollower] = useState(true);   // For Chainging Button Side 
 
    const { user } = Datastate();
-   console.log(' User is Existed  ',user);
+   console.log(' User in UserProfile isssss-- ',user);
 
     console.log(' UserProfile Component Starts  ')
     const { userid } = useParams();
@@ -35,7 +34,7 @@ const UserProfile = () => {
 
         const response = await axios.get(`/user/${userid}`,config)
         .then(res => {
-          console.log(' ressssssss isss',res.data)
+          console.log(' ressssssss isss here',res.data)
           setuserprofile(res)
          })
     }
@@ -103,11 +102,13 @@ const UserProfile = () => {
         toast.success(' User Has  Been UnFollowed  ')
     }
 
-     
-
 
   return (
     <>
+
+          {/* <h6>  inthe userProfile is - {user} </h6> */}
+          <h6>  User id is here --  {userid} </h6>
+
           <h5>  Inside the New User Profile   </h5>
             {
                userprofile ?  (
@@ -130,7 +131,7 @@ const UserProfile = () => {
                          <button onClick = {() => followuser()}>  Follow  </button>    
                       </>) : (
                       <>
-                     <button onClick = {() => unfollowuser()}>  UnFollow  </button>
+                         <button onClick = {() => unfollowuser()}>  UnFollow  </button>
                       </>)
                     }
                   </div>
@@ -153,22 +154,18 @@ const UserProfile = () => {
                   </div>
 
                </>) : (<>
-                  <h1>  Loading...... </h1>
+                  <h3>  Loading...... </h3>
                </>)
             }
 
-
-          
-
-{/* 
-      <div className="post-outercontainer" style = {{Width:'60%',display:'grid',padding:'1% 15%'}}>   
+      <div className="post-outercontainer" style = {{Width:'40%',display:'grid',padding:'1% 15%'}}>   
 
          <div className = "profile-partition" style = {{display:'grid',gridTemplateColumns:'200px 1fr',paddingTop:'5%',borderBottom:'2px solid black'}}> 
               <div className = "profile-part" > 
                <span> <img src =  "/Profile-img.png"  alt = "profile-img" style = {{width:'70%'}} /> </span>
               </div>
               <div className="profile-name"> 
-             <div> <h4> {user} </h4>  </div>
+               <h6> Logged user is -- {user} </h6> 
              <div> 
                <span> 40 posts </span>
                <span> 40 followers </span>
@@ -187,11 +184,8 @@ const UserProfile = () => {
                   </>
                  )
             })} */}
-          {/* </div> */}
-      {/* </div> */}
-
- {/* */}
-
+          </div>
+      </div>
     </>
   )
 }

@@ -35,7 +35,7 @@ const Profile = () => {
                <span> <img src =  "/Profile-img.png"  alt = "profile-img" style = {{width:'70%'}} /> </span>
               </div>
               <div className="profile-name"> 
-             <div> <h4> {user} </h4>  </div>
+             <div> <h6> {user} </h6>  </div>
              <div> 
                <span> {mypics.length} posts </span>
                <span> 40 followers </span>

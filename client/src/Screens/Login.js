@@ -25,10 +25,11 @@ const Login = () => {
        email,password}, config);
        toast.success(' Successfully Logged In ')
 
-        console.log(' Full DDDDDDDD -',data);
-        console.log(' data name is -', (data.name));
+        // console.log(' DATA before changing ',data);
+        // console.log(' data name is -', (data.name));
         localStorage.setItem('jwt',data.token);
         localStorage.setItem('user',JSON.stringify(data));
+        // console.log(' DATA After changing ',data);
  
         navigate('/');
     }catch(error)
