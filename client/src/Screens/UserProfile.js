@@ -15,7 +15,7 @@ const UserProfile = () => {
     console.log(' UserProfile Component Starts  ')
     const { userid } = useParams();
 
-   console.log('userrrrrr id is ',userid);
+   console.log('USERRR  is ',userid);
 
    const tokenhere = (localStorage.getItem('jwt'));
    console.log('token here in UserProfile ' , tokenhere);
