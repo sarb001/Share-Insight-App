@@ -114,7 +114,7 @@ const UserProfile = () => {
                userprofile ?  (
                <> 
                   <div style  = {{display:'grid',gridTemplateColumns:'1fr 1fr'}}>
-                    <div className="first-side"> 
+                    <div className="main-first-side"> 
                      <span style  = {{fontSize:'28px'}}> Username is -
                       {userprofile.data.user.name} </span>
                      <h6> Email - {userprofile.data.user.email} </h6>
